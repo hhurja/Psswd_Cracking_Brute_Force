@@ -34,7 +34,9 @@ def execute_attack(hashed_array, limit_on_length):
 		for subset in itertools.product(char_array, repeat=length):
 			temp_pass = "".join(subset)
 			iterator += 1
-			#print temp_pass
+			
+			# lines 40 - 48 are just meant to keep track of the amount of passwords that have been checked so far
+			# These lines can be commented out
 			if iterator % 50000000 == 0:
 				curr_time = time.time() - start_time
 				if(curr_time < 60):
@@ -46,7 +48,7 @@ def execute_attack(hashed_array, limit_on_length):
 				print "Checked", iterator, "passwords so far in", t
 
 	    		for p in hashed_array:
-	    			
+	    			# checks the current string permutation's hash against the array of passwords
 					if (p[1] == hashlib.md5( temp_pass ).hexdigest()):
 						print "Found password:",p[0], "in", time.time() - start_time, "seconds"
 						print "The hash is:", p[1], "\n"
@@ -60,12 +62,16 @@ if __name__ == '__main__':
 	if(len(sys.argv) != 2):
 		print "Please enter the name of the text file as an argument."
 	else:
+		# Upper bound puts a limit on the length of string to be checked
 		upper_bound = 8
 		pass_array = []
+		# reads the file passed in from the command line to an array of strings
 		pass_array = read_file(sys.argv[1])
+		# Hashes the passwords in the array and returns an array of pairs (original, hashed)
 		pass_array = hash_passwords(pass_array)
 
 		print "\n******* Checking Passwords now *******\n"
 
+		# actually starts to brute force crack the passwords
 		execute_attack(pass_array, upper_bound)
 

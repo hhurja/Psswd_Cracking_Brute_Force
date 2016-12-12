@@ -1,0 +1,37 @@
+* NOTE *
+The script with instructions to run is on Github at:
+https://github.com/hhurja/Psswd_Cracking_Brute_Force
+
+Or you can copy the file from the submission on blackboard and run the command:
+python password_cracking.py passwords.txt
+
+
+Part II - Cracked Passwords and time to crack
+
+Found password: Z in 0.000821828842163 seconds
+The hash is: 21c2e59531c8710156d34a3c30ac81d5 
+
+Found password: AD in 0.0317068099976 seconds
+The hash is: e182ebbc166d73366e7986813a7fc5f1 
+
+Found password: God in 5.25724697113 seconds
+The hash is: aeb9573c09919d210512b643907e56b8 
+
+Found password: 1234 in 188.459318876 seconds
+The hash is: 81dc9bdb52d04dc20036dbd8313ed055 
+
+Found password: AbCdE in 26407.7599499 seconds
+The hash is: 37e464916dcb6dfc3994ca4549e97272
+
+Checked 56450000000 passwords in 163.825102105 hours.
+
+Part III - Analysis
+Length vs. Time
+ * The longer the passwords, the longer they took to crack, obviously
+ * However the time taken was not linearly proportional to the lenght of the word. There were huge jumps in the amount of taken to crack each password as it gained an extra character.
+ * The one and two letter passwords each less than a second to break, then the three letter took a few seconds, the 4 letter about 20 minutes, and the 5 character took ~7 hours. Adding a character appeared to make take roughly 100 times longer to crack.
+
+Speed Up
+* To be honest, I didn't make my algorithm particularly efficient, which was a dumb mistake that I realized after I ran the scrpit.
+* I could have sped the process up by hashing the passwords from the input and then adding to those a hash set instead of an array, which would cut down on a lot of comparisons for every single potential password.
+* In addition, there are much faster techniques than brute forcing to crack passwords. I could have used some sort of dictionary of common passwords once I brute forced my way through all of the 4 character combinations.
